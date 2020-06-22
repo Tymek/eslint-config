@@ -1,14 +1,16 @@
 {
   "name": "@scrlk/eslint-config",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    ".eslintrc.js"
   ],
   "scripts": {
     "test": "eslint ."
   },
+  "repository": "github:Tymek/eslint-config",
   "peerDependencies": {
     "eslint": "^7.2.0"
   },
