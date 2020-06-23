@@ -1,14 +1,11 @@
 {
   "name": "@scrlk/eslint-config",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "license": "MIT",
   "files": [
     "index.js"
   ],
-  "bin": {
-    "eslint": "./node_modules/.bin/eslint"
-  },
   "scripts": {
     "test": "eslint ."
   },
