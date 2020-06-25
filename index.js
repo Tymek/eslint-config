@@ -1,6 +1,7 @@
 const plugins = [
   'import',
   'jest',
+  'jest-dom',
   'json',
   'jsx-a11y',
   'promise',
@@ -61,6 +62,18 @@ module.exports = {
     react: {
       version: 'detect',
     },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx']
+    },
+    'import/resolver': {
+      typescript: {}
+    },
+    'import/extensions': [
+      '.js',
+      '.jsx',
+      '.ts',
+      '.tsx',
+    ],
   },
   overrides: [
     {
