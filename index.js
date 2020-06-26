@@ -42,6 +42,8 @@ const rules = {
 		'avoidEscape': true,
 	}],
 	'max-len': ['warn', { code: 120 }],
+	'no-shadow': 'warn',
+	'no-console': 'warn',
 	'unicorn/filename-case': 'off',
 	'unicorn/prevent-abbreviations': 'off',
 	'unicorn/no-null': 'off',
