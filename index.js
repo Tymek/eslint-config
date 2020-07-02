@@ -1,4 +1,5 @@
 const plugins = [
+	'deprecation',
 	'import',
 	'jest',
 	'jest-dom',
@@ -24,8 +25,9 @@ const extendedConfigs = [
 ]
 
 const rules = {
-	indent: ['warn', 'tab'],
+	indent: ['warn', 'tab', { MemberExpression: 1 }],
 	semi: ['warn', 'never'],
+	'no-tabs': 'off',
 	'eol-last': ["warn", "always"],
 	'no-trailing-spaces': 'warn',
 	'comma-dangle': ['warn', 'always'],
@@ -44,6 +46,7 @@ const rules = {
 	'max-len': ['warn', { code: 120 }],
 	'no-shadow': 'warn',
 	'no-console': 'warn',
+	'implicit-arrow-linebreak': 'off',
 	'unicorn/filename-case': 'off',
 	'unicorn/prevent-abbreviations': 'off',
 	'unicorn/no-null': 'off',
@@ -54,6 +57,13 @@ const rules = {
 	'react/jsx-one-expression-per-line': 'off',
 	'react/react-in-jsx-scope': 'off',
 	'unicorn/no-reduce': 'off',
+	'react/jsx-indent': ['warn', 'tab', {checkAttributes: true, indentLogicalExpressions: true}],
+	'object-curly-newline': ['error', {
+		ObjectExpression: { multiline: true, consistent: true },
+		ObjectPattern: { multiline: true, consistent: true },
+		ImportDeclaration: { multiline: true, consistent: true },
+		ExportDeclaration: { multiline: true, consistent: true },
+	}],
 }
 
 module.exports = {
@@ -112,21 +122,20 @@ module.exports = {
 			],
 			extends: [
 				...extendedConfigs,
+				'airbnb-typescript',
+				'airbnb/hooks',
 				'plugin:@typescript-eslint/recommended',
 				'plugin:@typescript-eslint/recommended-requiring-type-checking',
 				'plugin:import/typescript',
 			],
 			rules: {
 				...rules,
-				'default-case': 'off',
-				'no-dupe-class-members': 'off',
-				'no-undef': 'off', // problematic. TS reports it anyway
+				'max-len': rules['max-len'],
+				'@typescript-eslint/indent': rules['indent'],
+				'@typescript-eslint/semi': rules['semi'],
+				'@typescript-eslint/semi': rules['semi'],
 				'@typescript-eslint/consistent-type-assertions': 'warn',
-				'no-array-constructor': 'off',
 				'@typescript-eslint/no-array-constructor': 'warn',
-				semi: 'off',
-				'@typescript-eslint/semi': rules.semi,
-				'no-use-before-define': 'off',
 				'@typescript-eslint/no-use-before-define': [
 					'warn', // https://github.com/typescript-eslint/typescript-eslint/issues/1856
 					{
@@ -136,27 +145,22 @@ module.exports = {
 						typedefs: false,
 					},
 				],
-				'no-unused-expressions': 'off',
-				'@typescript-eslint/no-unused-expressions': [
-					'error',
-					{
-						allowShortCircuit: true,
-						allowTernary: true,
-						allowTaggedTemplates: true,
-					},
-				],
-				'no-unused-vars': 'off',
-				'@typescript-eslint/no-unused-vars': [
-					'warn',
-					{
-						args: 'none',
-						ignoreRestSiblings: true,
-					},
-				],
-				'no-useless-constructor': 'off',
-				'@typescript-eslint/no-useless-constructor': 'warn',
+				"deprecation/deprecation": "warn"
 			},
 		},
+		{
+			files: [
+				'**/*.spec.ts?(x)',
+				'**/*.test.ts?(x)',
+				'**/*.specs.ts?(x)',
+				'**/*.tests.ts?(x)',
+			],
+			rules: {
+				'@typescript-eslint/no-unsafe-member-access': 'off',
+				'@typescript-eslint/no-unsafe-assignment': 'off',
+				'@typescript-eslint/no-unsafe-call': 'off',
+			}
+		}
 	],
 	rules,
 }
